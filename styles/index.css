@@ -1,0 +1,7 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+.bg-spec {
+  background-color: theme("colors.bgspec");
+}
