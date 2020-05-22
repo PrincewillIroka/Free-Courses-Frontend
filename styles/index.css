@@ -2,6 +2,15 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-.bg-spec {
+.bg-spec{
   background-color: theme("colors.bgspec");
+}
+
+.active-tab {
+  background-color: theme("colors.bgspec");
+  border-left: 4px solid theme("colors.bgred");
+}
+
+.inactive-tab {
+  border-left: 4px solid transparent;
 }

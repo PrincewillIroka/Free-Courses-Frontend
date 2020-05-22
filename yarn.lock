@@ -3492,6 +3492,11 @@ md5.js@^1.3.4:
     inherits "^2.0.1"
     safe-buffer "^5.1.2"
 
+mdi-react@^7.2.0:
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/mdi-react/-/mdi-react-7.2.0.tgz#aedd99c572b391ec5837c910002dc2b7cf5e0066"
+  integrity sha512-oY1uN9PISF/1mJS2p6YeScTet8pzRSXpl3w+bRYQdHV8s4jB71TYdcg/tNAXUOhH41pfs43yF9okxZtJpN3nmQ==
+
 mdn-data@2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/mdn-data/-/mdn-data-2.0.4.tgz#699b3c38ac6f1d728091a64650b65d388502fd5b"
