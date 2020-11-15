@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.1",
     "mdi-react": "^7.2.0",
     "next": "^9.4.1",
     "react": "^16.13.1",

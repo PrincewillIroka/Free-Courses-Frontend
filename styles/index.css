@@ -41,3 +41,11 @@
   margin: 0 20px 20px;
 }
 
+.checked {
+  color: orange;
+}
+
+.text-source{
+  color: rgb(173, 173, 173);
+}
+
