@@ -1,68 +1,106 @@
-export default function Container() {
+import { useEffect, useState } from "react";
+
+function Container({ courses }) {
+  const [state, setState] = useState({
+    // courses: [],
+    dummyStars: new Array(5).fill(),
+  });
+
+  // useEffect(() => {
+  //   getCourses();
+  // }, []);
+
+  // const getCourses = async (id) => {
+  //   let res = await fetch(
+  //     `http://free-courses-backend.herokuapp.com/api/courses?pageNumber=0&limit=10`
+  //   );
+
+  //   res = await res.json();
+  //   const courses = res?.payload;
+  //   handleSetState({ courses });
+  // };
+
+  const handleSetState = (params) => {
+    const obj = {};
+    for (const property in params) {
+      obj[property] = params[property];
+    }
+    setState({ ...state, ...obj });
+  };
+
+  const fillArray = (num) => {
+    return new Array(num).fill();
+  };
+
   return (
     <section className="px-6 h-container sleek-scrollbar">
       <div className="grid gap-8 row-gap-10 grid-cols-3">
-        <div className="h-64 bg-white shadow-lg">
-          <img
-            className="h-40 w-full object-cover"
-            src="https://img-a.udemycdn.com/course/750x422/500730_4e19_2.jpg"
-          />
-          <div className="h-16 w-full px-2 mt-1">
-            <div className="font-bold text-base truncate">
-              Getting started in 3D Animation
-            </div>
-            <div className="text-sm text-gray-600 truncate">
-              Create professional-level, 3D character animations in record time
-              for a variety of applications.
-            </div>
-            <div className="flex w-full justify-between">
-              <div>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
+        {courses?.length
+          ? courses.map((course, index) => (
+              <div key={index} className="h-64 bg-white shadow-lg">
+                <img className="h-40 w-full object-cover" src={course.banner} />
+                <div className="h-16 w-full px-2 mt-1">
+                  <div className="font-bold text-base truncate">
+                    {course.title}
+                  </div>
+                  <div className="text-sm text-gray-600 truncate">
+                    {course.description}
+                  </div>
+                  <div className="flex w-full justify-between">
+                    <div>
+                      {fillArray(course.stars)?.length ? (
+                        <>
+                          {fillArray(course.stars)?.map((star) => (
+                            <span className="fa fa-star checked"></span>
+                          ))}
+                          {fillArray(course.stars)?.length < 5
+                            ? fillArray(5 - course.stars)?.map((star) => (
+                                <span className="fa fa-star"></span>
+                              ))
+                            : null}
+                        </>
+                      ) : (
+                        state.dummyStars.map((star) => (
+                          <span className="fa fa-star"></span>
+                        ))
+                      )}
+                    </div>
+                    <img src="/assets/cards-heart-outline.svg" />
+                  </div>
+                  <div className="text-xs">
+                    <span className="text-gray-600">Source:</span>{" "}
+                    <span className="truncate">{course.source}</span>
+                  </div>
+                </div>
               </div>
-              <img src="/assets/cards-heart-outline.svg" />
-            </div>
-            <div className="text-xs">
-              <span className="text-gray-600">Source:</span> <span>Udemy</span>
-            </div>
-          </div>
-        </div>
-        <div className="h-64 bg-white shadow-lg">
-          <img
-            className="h-40 w-full object-cover"
-            src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://s3.amazonaws.com/coursera-course-photos/99/7ab7c00f7b11e79b617dbb2116532d/contractnegotiations_Logo_080814d.jpg?auto=format%2Ccompress&dpr=1&w=160&h=160&fit=fill&bg=FFF"
-          />
-          <div className="h-16 w-full px-2 mt-1">
-            <div className="font-bold text-base  truncate">
-              Successful Negotiation: Essential Strategies and Skills
-            </div>
-            <div className="text-sm text-gray-600 truncate">
-              No description
-            </div>
-            <div className="flex w-full justify-between">
-              <div>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-              </div>
-              <img src="/assets/cards-heart.svg" />
-            </div>
-            <div className="text-xs">
-              <span className="text-gray-600">Source:</span>{" "}
-              <span>Coursera</span>
-            </div>
-          </div>
-        </div>
-        <div className="h-64 bg-white shadow-lg"></div>
-        <div className="h-64 bg-white shadow-lg"></div>
-        <div className="h-64 bg-white shadow-lg"></div>
-        <div className="h-64 bg-white shadow-lg"></div>
+            ))
+          : null}
       </div>
     </section>
   );
 }
+
+export async function getStaticProps() {
+  let res = await fetch(
+    `http://free-courses-backend.herokuapp.com/api/courses?pageNumber=0&limit=10`
+  );
+
+  res = await res.json();
+  const courses = res?.payload;
+
+  console.log(courses);
+
+  if (!courses) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: {
+      courses,
+    },
+  };
+}
+
+export default Container;
