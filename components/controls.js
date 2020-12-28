@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import AscendingSortIcon from "mdi-react/SortAlphabeticalAscendingIcon";
 import DescendingSortIcon from "mdi-react/SortAlphabeticalDescendingIcon";
 
@@ -11,11 +10,11 @@ export default function Controls({ activeTab }) {
         <span>Courses</span>
         <span className="mx-2">/</span>
         <span>
-          {activeTab.tag === "all_courses"
+          {activeTab?.tag === "all_courses"
             ? "New"
-            : activeTab.tag === "bookmarks"
+            : activeTab?.tag === "bookmarks"
             ? "Bookmarks"
-            : activeTab.tag === "suggest_course"
+            : activeTab?.tag === "suggest_course"
             ? "Make Suggestion"
             : null}
         </span>

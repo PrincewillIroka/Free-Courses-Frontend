@@ -45,7 +45,10 @@
   color: orange;
 }
 
-.text-source{
+.text-source {
   color: rgb(173, 173, 173);
 }
 
+.bookmark {
+  color: #c8c8c8;
+}

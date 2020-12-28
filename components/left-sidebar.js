@@ -4,7 +4,7 @@ import BookmarkIcon from "mdi-react/BookmarkMultipleOutlineIcon";
 import HandOkayIcon from "mdi-react/HandOkayIcon";
 
 export default function LeftSidebar({ tabs, activeTab, setActiveTab }) {
-  return (
+   return (
     <div className="flex-column px-2">
       <div className="flex items-center justify-center mt-4">
         <img
@@ -19,8 +19,8 @@ export default function LeftSidebar({ tabs, activeTab, setActiveTab }) {
           return (
             <div
               key={index}
-              className={`flex items-center py-2 px-4 mb-4 ${
-                activeTab.tag === tab.tag ? "active-tab" : "inactive-tab"
+              className={`flex items-center py-2 px-4 mb-4 select-none ${
+                activeTab?.tag === tab.tag ? "active-tab" : "inactive-tab"
               }`}
               onClick={() => setActiveTab(tab)}
             >
