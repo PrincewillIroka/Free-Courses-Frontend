@@ -34,8 +34,6 @@ export async function getStaticProps() {
   res = await res.json();
   const courses = res?.payload;
 
-  console.log(courses);
-
   if (!courses) {
     return {
       notFound: true,

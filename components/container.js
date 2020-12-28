@@ -50,18 +50,23 @@ function Container({ courses }) {
                     <div>
                       {fillArray(course.stars)?.length ? (
                         <>
-                          {fillArray(course.stars)?.map((star) => (
-                            <span className="fa fa-star checked"></span>
+                          {fillArray(course.stars)?.map((star, index) => (
+                            <span
+                              key={index}
+                              className="fa fa-star checked"
+                            ></span>
                           ))}
                           {fillArray(course.stars)?.length < 5
-                            ? fillArray(5 - course.stars)?.map((star) => (
-                                <span className="fa fa-star"></span>
+                            ? fillArray(
+                                5 - course.stars
+                              )?.map((star, index) => (
+                                <span key={index} className="fa fa-star"></span>
                               ))
                             : null}
                         </>
                       ) : (
-                        state.dummyStars.map((star) => (
-                          <span className="fa fa-star"></span>
+                        state.dummyStars.map((star, index) => (
+                          <span key={index} className="fa fa-star"></span>
                         ))
                       )}
                     </div>
