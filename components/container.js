@@ -80,27 +80,4 @@ function Container({ courses }) {
   );
 }
 
-export async function getStaticProps() {
-  let res = await fetch(
-    `http://free-courses-backend.herokuapp.com/api/courses?pageNumber=0&limit=10`
-  );
-
-  res = await res.json();
-  const courses = res?.payload;
-
-  console.log(courses);
-
-  if (!courses) {
-    return {
-      notFound: true,
-    };
-  }
-
-  return {
-    props: {
-      courses,
-    },
-  };
-}
-
 export default Container;

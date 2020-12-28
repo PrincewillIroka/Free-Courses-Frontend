@@ -5,7 +5,7 @@ import RightSidebar from "../components/right-sidebar";
 import Controls from "../components/controls";
 import Container from "../components/container";
 
-function HomePage() {
+function HomePage({ courses }) {
   return (
     <div>
       <Layout />
@@ -15,8 +15,8 @@ function HomePage() {
         </aside>
         <main className="w-4/5 bg-spec flex-column h-screen overflow-hidden">
           <SearchBar />
-          <Controls />
-          <Container/>
+          <Controls courses={courses} />
+          <Container />
         </main>
         <aside className="w-1/5">
           <RightSidebar />
@@ -24,6 +24,29 @@ function HomePage() {
       </section>
     </div>
   );
+}
+
+export async function getStaticProps() {
+  let res = await fetch(
+    `http://free-courses-backend.herokuapp.com/api/courses?pageNumber=0&limit=10`
+  );
+
+  res = await res.json();
+  const courses = res?.payload;
+
+  console.log(courses);
+
+  if (!courses) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: {
+      courses,
+    },
+  };
 }
 
 export default HomePage;
