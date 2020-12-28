@@ -15,8 +15,8 @@ function HomePage({ courses }) {
         </aside>
         <main className="w-4/5 bg-spec flex-column h-screen overflow-hidden">
           <SearchBar />
-          <Controls courses={courses} />
-          <Container />
+          <Controls />
+          <Container courses={courses} />
         </main>
         <aside className="w-1/5">
           <RightSidebar />
