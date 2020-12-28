@@ -1,13 +1,9 @@
 import React, { useState } from "react";
-
 import CourseIcon from "mdi-react/BookOpenPageVariantIcon";
 import BookmarkIcon from "mdi-react/BookmarkMultipleOutlineIcon";
+import HandOkayIcon from "mdi-react/HandOkayIcon";
 
-export default function LeftSidebar() {
-  const tabs = ["all courses", "bookmarks"];
-
-  const [activeTab, setActiveTab] = useState("all courses");
-
+export default function LeftSidebar({ tabs, activeTab, setActiveTab }) {
   return (
     <div className="flex-column px-2">
       <div className="flex items-center justify-center mt-4">
@@ -19,22 +15,24 @@ export default function LeftSidebar() {
         <h3 className="font-bold text-lg">Free Courses</h3>
       </div>
       <div className="mt-24">
-        {tabs.map((tab, index) => {
+        {tabs?.map((tab, index) => {
           return (
             <div
               key={index}
               className={`flex items-center py-2 px-4 mb-4 ${
-                activeTab === tab ? "active-tab" : "inactive-tab"
+                activeTab.tag === tab.tag ? "active-tab" : "inactive-tab"
               }`}
               onClick={() => setActiveTab(tab)}
             >
-              {tab === "all courses" ? (
+              {tab.tag === "all_courses" ? (
                 <CourseIcon color="#cf1717" className="mr-4" />
-              ) : (
+              ) : tab.tag === "bookmarks" ? (
                 <BookmarkIcon color="#cf1717" className="mr-4" />
-              )}
+              ) : tab.tag === "suggest_course" ? (
+                <HandOkayIcon color="#cf1717" className="mr-4" />
+              ) : null}
               <span className="font-medium cursor-default capitalize">
-                {tab}
+                {tab.title}
               </span>
             </div>
           );

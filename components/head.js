@@ -6,10 +6,10 @@ export default function Layout() {
   return (
     <Head>
       <link rel="icon" href="/static/favicon.ico" />
-      <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      <meta name="viewport" content="initial-scale=0, width=device-width" />
       <meta
         name="description"
-        content="Learn how to build a personal website using Next.js"
+        content="Browse the latest free online courses from a wide range of world class platforms."
       />
       <meta
         property="og:image"

@@ -40,13 +40,13 @@ function Container({ courses }) {
               <div key={index} className="h-64 bg-white shadow-lg">
                 <img className="h-40 w-full object-cover" src={course.banner} />
                 <div className="h-16 w-full px-2 mt-1">
-                  <div className="font-bold text-base truncate">
+                  <div className="font-bold text-base truncate h-6">
                     {course.title}
                   </div>
-                  <div className="text-sm text-gray-600 truncate">
+                  <div className="text-sm text-gray-600 truncate h-6">
                     {course.description}
                   </div>
-                  <div className="flex w-full justify-between">
+                  <div className="flex w-full justify-between h-6">
                     <div>
                       {fillArray(course.stars)?.length ? (
                         <>
