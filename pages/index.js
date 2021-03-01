@@ -84,7 +84,7 @@ function HomePage({ courses }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   let res = await fetch(
     `http://free-courses-backend.herokuapp.com/api/courses?pageNumber=0&limit=10`
   );
