@@ -47,7 +47,7 @@ function Container({ courses, handleBookmark }) {
                     {course.description}
                   </div>
                   <div className="flex w-full justify-between h-6">
-                    <div>
+                    <div className="flex h-6">
                       {fillArray(course.stars)?.length ? (
                         <>
                           {fillArray(course.stars)?.map((star, index) => (
