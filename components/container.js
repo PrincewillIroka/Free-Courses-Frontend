@@ -32,15 +32,26 @@ function Container({ courses, handleBookmark }) {
     setState({ bookmarks });
   };
 
+  const handleNavigation = (link) => {
+    window.open(link, "_newtab");
+  };
+
   return (
     <section className="px-6 h-container sleek-scrollbar">
       <div className="grid gap-8 row-gap-10 grid-cols-3">
         {courses?.length
           ? courses.map((course, index) => (
               <div key={shortid.generate()} className="h-64 bg-white shadow-lg">
-                <img className="h-40 w-full object-cover" src={course.banner} />
+                <img
+                  className="h-40 w-full object-cover cursor-pointer"
+                  src={course.banner}
+                  onClick={() => handleNavigation(course.link)}
+                />
                 <div className="h-16 w-full px-2 mt-1">
-                  <div className="font-bold text-base truncate h-6">
+                  <div
+                    className="font-bold text-base truncate h-6 cursor-pointer"
+                    onClick={() => handleNavigation(course.link)}
+                  >
                     {course.title}
                   </div>
                   <div className="text-sm text-gray-600 truncate h-6">

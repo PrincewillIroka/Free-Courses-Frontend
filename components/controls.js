@@ -19,17 +19,21 @@ export default function Controls({ activeTab }) {
             : null}
         </span>
       </div>
-      {sortedBy === "ascending" ? (
-        <AscendingSortIcon
-          className="sort-icon"
-          onClick={() => setSorted("descending")}
-        />
-      ) : (
-        <DescendingSortIcon
-          className="sort-icon"
-          onClick={() => setSorted("ascending")}
-        />
-      )}
+      {activeTab?.tag !== "suggest_course" ? (
+        <>
+          {sortedBy === "ascending" ? (
+            <AscendingSortIcon
+              className="sort-icon"
+              onClick={() => setSorted("descending")}
+            />
+          ) : (
+            <DescendingSortIcon
+              className="sort-icon"
+              onClick={() => setSorted("ascending")}
+            />
+          )}
+        </>
+      ) : null}
     </section>
   );
 }

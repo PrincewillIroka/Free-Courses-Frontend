@@ -71,6 +71,9 @@ function HomePage({ courses }) {
             <Bookmarks
               bookmarks={state?.bookmarks}
               handleBookmark={handleBookmark}
+              setActiveTab={(tab) => {
+                handleSetState({ activeTab: tab });
+              }}
             />
           ) : state.activeTab?.tag === "suggest_course" ? (
             <MakeSuggestion />
