@@ -72,12 +72,14 @@ function Container({ courses, handleBookmark }) {
                     </div>
                     {isBookmark(course) ? (
                       <CardsHeartIcon
-                        className="bookmark"
+                        title="Remove from bookmarks"
+                        className="bookmark cursor-pointer z-10"
                         onClick={() => computeBookmarks(course)}
                       />
                     ) : (
                       <HeartOutlineIcon
-                        className="bookmark"
+                        title="Add to bookmarks"
+                        className="bookmark cursor-pointer z-10"
                         onClick={() => computeBookmarks(course)}
                       />
                     )}

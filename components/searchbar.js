@@ -4,11 +4,11 @@ import SearchIcon from "mdi-react/SearchIcon";
 
 export default function SearchBar() {
   return (
-    <section className="flex items-center bg-white w-2/3 mt-6 ml-6 mr-16 mb-12 pl-4 pr-4 h-8 rounded-full">
+    <section className="flex items-center bg-white w-2/3 mt-6 ml-6 mr-16 mb-10 pl-4 pr-4 h-10 rounded-full shadow-md">
       <SearchIcon color="#ccc"/>
       <input
         type="text"
-        placeholder="Looking for..."
+        placeholder="Search here to find free technical courses..."
         className="w-full py-1 px-2"
       />
     </section>
