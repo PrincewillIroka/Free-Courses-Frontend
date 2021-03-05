@@ -60,7 +60,7 @@ function Container({ courses, handleBookmark }) {
                   <div className="flex w-full justify-between h-6">
                     <div className="flex h-4 w-full">
                       {fillArray(course.stars)?.length ? (
-                        <>
+                        <div>
                           {fillArray(course.stars)?.map((star, index) => (
                             <span
                               key={index}
@@ -74,7 +74,7 @@ function Container({ courses, handleBookmark }) {
                                 <span key={index} className="fa fa-star"></span>
                               ))
                             : null}
-                        </>
+                        </div>
                       ) : (
                         state.dummyStars.map((star, index) => (
                           <span key={index} className="fa fa-star"></span>

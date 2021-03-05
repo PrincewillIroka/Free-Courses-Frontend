@@ -7,8 +7,9 @@ import Controls from "../components/controls";
 import Container from "../components/container";
 import MakeSuggestion from "../components/suggest-a-course";
 import Bookmarks from "../components/bookmarks";
+import { API_URL } from "../config";
 
-function HomePage({ courses }) {
+function HomePage({ courses, isFetching }) {
   const tabs = [
     { title: "All Courses", tag: "all_courses" },
     { title: "Bookmarks", tag: "bookmarks" },
@@ -21,11 +22,15 @@ function HomePage({ courses }) {
   });
 
   useEffect(() => {
+    handleSetup();
+  }, []);
+
+  const handleSetup = () => {
     setState({
       ...state,
       bookmarks: JSON.parse(localStorage?.getItem("bookmarks")) || [],
     });
-  }, []);
+  };
 
   const handleBookmark = (course) => {
     let bookmarks = state?.bookmarks;
@@ -51,6 +56,10 @@ function HomePage({ courses }) {
     setState({ ...state, ...obj });
   };
 
+  const handleCategories = () => {
+
+  }
+
   return (
     <div>
       <Layout />
@@ -66,7 +75,11 @@ function HomePage({ courses }) {
           <SearchBar />
           <Controls activeTab={state?.activeTab} />
           {state.activeTab?.tag === "all_courses" ? (
-            <Container courses={courses} handleBookmark={handleBookmark} />
+            <Container
+              courses={courses}
+              isFetching={isFetching}
+              handleBookmark={handleBookmark}
+            />
           ) : state.activeTab?.tag === "bookmarks" ? (
             <Bookmarks
               bookmarks={state?.bookmarks}
@@ -87,23 +100,27 @@ function HomePage({ courses }) {
   );
 }
 
+const pageNumber = 0;
+const limit = 10;
+
 export async function getServerSideProps() {
   let res = await fetch(
-    `http://free-courses-backend.herokuapp.com/api/courses?pageNumber=0&limit=10`
+    `${API_URL}/courses?pageNumber=${pageNumber}&limit=${limit}`
   );
 
   res = await res.json();
   const courses = res?.payload;
 
-  if (!courses) {
-    return {
-      notFound: true,
-    };
-  }
+  // if (!courses) {
+  //   return {
+  //     notFound: true,
+  //   };
+  // }
 
   return {
     props: {
       courses,
+      isFetching: false,
     },
   };
 }

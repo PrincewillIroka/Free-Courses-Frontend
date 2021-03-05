@@ -16,7 +16,6 @@ module.exports = {
     // purgeLayersByDefault: true,
   },
   purge: [],
-  target: "relaxed",
   prefix: "",
   important: false,
   separator: ":",
