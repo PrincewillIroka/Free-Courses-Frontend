@@ -3,10 +3,6 @@ module.exports = {
     // removeDeprecatedGapUtilities: true,
     // purgeLayersByDefault: true,
   },
-  purge: {
-    enabled: false,
-    content: ['./**/*.js'],
-  },
   prefix: "",
   important: false,
   separator: ":",
