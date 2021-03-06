@@ -4,8 +4,8 @@ module.exports = {
     // purgeLayersByDefault: true,
   },
   purge: {
-    enabled: true,
-    content: ['./**/*.js'],
+    enabled: false,
+    // content: ['./**/*.js'],
   },
   prefix: "",
   important: false,
