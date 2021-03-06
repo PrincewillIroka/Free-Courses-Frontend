@@ -3,7 +3,7 @@ module.exports = {
     // removeDeprecatedGapUtilities: true,
     // purgeLayersByDefault: true,
   },
-  purge: ["./store/**/*.js"],
+  purge: [],
   prefix: "",
   important: false,
   separator: ":",
