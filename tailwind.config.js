@@ -1,21 +1,15 @@
 module.exports = {
-  purge: [],
-  theme: {
-    colors: {
-      bgspec: "#f6f6f6",
-      bgred: "#cf1717",
-    },
-  },
-  variants: {},
-  plugins: [],
-};
-
-module.exports = {
   future: {
     // removeDeprecatedGapUtilities: true,
     // purgeLayersByDefault: true,
   },
-  purge: [],
+  purge: [
+    "./pages/**/*.vue",
+    "./components/**/*.vue",
+    "./plugins/**/*.vue",
+    "./static/**/*.vue",
+    "./store/**/*.vue",
+  ],
   prefix: "",
   important: false,
   separator: ":",

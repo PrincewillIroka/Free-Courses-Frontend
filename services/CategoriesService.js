@@ -1,6 +1,6 @@
 import { API_URL } from "../config";
 
-export const getCategories = ({ title, limit, pageNumber }) => {
+export const getCategories = (API_URL) => {
   return new Promise((resolve, reject) => {
     const url = `${API_URL}/categories`;
     fetch(url, {

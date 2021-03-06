@@ -1,8 +1,8 @@
 import { API_URL } from "../config";
 
-export const searchCourses = ({ title, limit, pageNumber }) => {
+export const searchCourses = ({ API_URL, title, limit, pageNumber }) => {
   return new Promise((resolve, reject) => {
-    const url = `${API_URL}/courses?title=${title}limit=${limit}&pageNumber=${pageNumber}`;
+    const url = `${API_URL}/courses/search?title=${title}&limit=${limit}&pageNumber=${pageNumber}`;
     fetch(url, {
       headers: {
         Accept: "application/json",

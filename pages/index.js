@@ -8,8 +8,9 @@ import Container from "../components/container";
 import MakeSuggestion from "../components/suggest-a-course";
 import Bookmarks from "../components/bookmarks";
 import { API_URL } from "../config";
+import { searchCourses } from "../services/CourseService";
 
-function HomePage({ courses, isFetching }) {
+function HomePage({ API_URL, isFetching, courses, pageNumber, limit }) {
   const tabs = [
     { title: "All Courses", tag: "all_courses" },
     { title: "Bookmarks", tag: "bookmarks" },
@@ -19,6 +20,10 @@ function HomePage({ courses, isFetching }) {
   const [state, setState] = useState({
     activeTab: { title: "All Courses", tag: "all_courses" },
     bookmarks: [],
+    isFetching,
+    courses,
+    pageNumber,
+    limit,
   });
 
   useEffect(() => {
@@ -56,9 +61,19 @@ function HomePage({ courses, isFetching }) {
     setState({ ...state, ...obj });
   };
 
-  const handleCategories = () => {
-
-  }
+  const handleSearchRequest = async (value) => {
+    let { pageNumber, limit } = state;
+    handleSetState({ isFetching: true });
+    await searchCourses({ API_URL, title: value, pageNumber, limit })
+      .then((response) => {
+        const courses = response?.payload || [];
+        handleSetState({ isFetching: false, courses });
+      })
+      .catch((error) => {
+        console.error(error);
+        handleSetState({ isFetching: false, courses: [] });
+      });
+  };
 
   return (
     <div>
@@ -72,12 +87,12 @@ function HomePage({ courses, isFetching }) {
           />
         </aside>
         <main className="w-4/5 bg-spec flex-column h-screen overflow-hidden">
-          <SearchBar />
+          <SearchBar searchCourses={handleSearchRequest} />
           <Controls activeTab={state?.activeTab} />
           {state.activeTab?.tag === "all_courses" ? (
             <Container
-              courses={courses}
-              isFetching={isFetching}
+              courses={state?.courses}
+              isFetching={state?.isFetching}
               handleBookmark={handleBookmark}
             />
           ) : state.activeTab?.tag === "bookmarks" ? (
@@ -92,35 +107,33 @@ function HomePage({ courses, isFetching }) {
             <MakeSuggestion />
           ) : null}
         </main>
-        <aside className="w-1/5">
-          <RightSidebar />
+        <aside className="w-1/5 overflow-y-hidden">
+          <RightSidebar API_URL={API_URL} />
         </aside>
       </section>
     </div>
   );
 }
 
-const pageNumber = 0;
-const limit = 10;
-
 export async function getServerSideProps() {
+  let pageNumber = 0;
+  let limit = 10;
+
   let res = await fetch(
     `${API_URL}/courses?pageNumber=${pageNumber}&limit=${limit}`
   );
 
   res = await res.json();
   const courses = res?.payload;
-
-  // if (!courses) {
-  //   return {
-  //     notFound: true,
-  //   };
-  // }
+  pageNumber = courses?.length ? pageNumber + 1 : pageNumber;
 
   return {
     props: {
       courses,
       isFetching: false,
+      API_URL,
+      pageNumber,
+      limit,
     },
   };
 }
