@@ -118,7 +118,7 @@ function HomePage({ API_URL, isFetching, courses, pageNumber, limit }) {
 export async function getServerSideProps() {
   let pageNumber = 0;
   let limit = 10;
-  const API_URL = "http://free-courses-backend.herokuapp.com/api";
+  const API_URL = "https://free-courses-backend.herokuapp.com/api";
 
   let res = await fetch(
     `${API_URL}/courses?pageNumber=${pageNumber}&limit=${limit}`
