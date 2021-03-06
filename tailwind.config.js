@@ -5,7 +5,7 @@ module.exports = {
   },
   purge: {
     enabled: false,
-    // content: ['./**/*.js'],
+    content: ['./**/*.js'],
   },
   prefix: "",
   important: false,
