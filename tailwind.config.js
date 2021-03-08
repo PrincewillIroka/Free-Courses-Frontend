@@ -1,8 +1,22 @@
 module.exports = {
+  purge: [],
+  theme: {
+    colors: {
+      bgspec: "#f6f6f6",
+      bgred: "#cf1717",
+    },
+  },
+  variants: {},
+  plugins: [],
+};
+
+module.exports = {
   future: {
     // removeDeprecatedGapUtilities: true,
     // purgeLayersByDefault: true,
   },
+  purge: [],
+  target: "relaxed",
   prefix: "",
   important: false,
   separator: ":",
