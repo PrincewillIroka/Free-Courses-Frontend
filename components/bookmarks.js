@@ -13,7 +13,7 @@ export default function Bookmarks({ bookmarks, handleBookmark, setActiveTab }) {
             <img
               alt="Bookmark Illustration"
               className="h-56 w-56"
-              src="/assets/bookmark_illustration.svg"
+              src="/assets/illustration.svg"
             />
           </div>
           <button

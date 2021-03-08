@@ -3,7 +3,7 @@ import NotificationIcon from "mdi-react/NotificationsIcon";
 import shortid from "shortid";
 import { getCategories } from "../services/CategoriesService";
 
-export default function RightSidebar({ API_URL }) {
+export default function RightSidebar({ API_URL, changeCategory }) {
   const [state, setState] = useState({ categories: [] });
   useEffect(() => {
     handleGetCategories();
@@ -36,7 +36,11 @@ export default function RightSidebar({ API_URL }) {
       {state?.categories ? (
         <div className="flex-col px-4">
           {state?.categories.map((category) => (
-            <span key={shortid.generate()} className="text-gray-600 py-2 w-full block text-center text-sm border-b-1 border-gray-200">
+            <span
+              onClick={() => changeCategory(category)}
+              key={shortid.generate()}
+              className="cursor-pointer text-gray-600 py-2 w-full block text-center text-sm border-b-1 border-gray-200"
+            >
               {category?.title}
             </span>
           ))}

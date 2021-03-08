@@ -8,7 +8,7 @@ import Container from "../components/container";
 import MakeSuggestion from "../components/suggest-a-course";
 import Bookmarks from "../components/bookmarks";
 import { API_URL } from "../config";
-import { searchCourses } from "../services/CourseService";
+import { searchCourses, getCoursesByCategory } from "../services/CourseService";
 
 function HomePage({ API_URL, isFetching, courses, pageNumber, limit }) {
   const tabs = [
@@ -75,6 +75,22 @@ function HomePage({ API_URL, isFetching, courses, pageNumber, limit }) {
       });
   };
 
+  const changeCategory = async (categoryId) => {
+    console.log(categoryId);
+    let pageNumber = 10,
+      limit = 0;
+    await handleSetState({ isFetching: true });
+    await getCoursesByCategory({ categoryId, pageNumber, limit })
+      .then((response) => {
+        const courses = response?.payload || [];
+        // handleSetState({ isFetching: false, courses });
+      })
+      .catch((error) => {
+        console.error(error);
+        handleSetState({ isFetching: false, courses: [] });
+      });
+  };
+
   return (
     <div>
       <Layout />
@@ -108,7 +124,7 @@ function HomePage({ API_URL, isFetching, courses, pageNumber, limit }) {
           ) : null}
         </main>
         <aside className="w-1/5 overflow-y-hidden">
-          <RightSidebar API_URL={API_URL} />
+          <RightSidebar API_URL={API_URL} changeCategory={changeCategory} />
         </aside>
       </section>
     </div>
