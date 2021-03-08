@@ -68,7 +68,7 @@ function Container({ courses, isFetching, handleBookmark }) {
                     <div className="flex w-full justify-between h-6">
                       <div className="flex h-4 w-full">
                         {fillArray(course.stars)?.length ? (
-                          <div>
+                          <div className="w-full">
                             {fillArray(course.stars)?.map((star, index) => (
                               <span
                                 key={index}
