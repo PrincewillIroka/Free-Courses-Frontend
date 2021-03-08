@@ -1,7 +1,7 @@
 module.exports = {
   future: {
-    removeDeprecatedGapUtilities: true,
-    purgeLayersByDefault: true,
+    // removeDeprecatedGapUtilities: true,
+    // purgeLayersByDefault: true,
   },
   purge: [],
   prefix: "",
@@ -803,5 +803,5 @@ module.exports = {
     animation: ["responsive"],
   },
   corePlugins: {},
-  plugins: [require("@tailwindcss/forms")]
+  plugins: []
 };
