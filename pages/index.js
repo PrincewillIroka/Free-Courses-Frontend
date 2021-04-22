@@ -76,7 +76,6 @@ function HomePage({ API_URL, isFetching, courses, pageNumber, limit }) {
   };
 
   const changeCategory = async (categoryId) => {
-    console.log(categoryId);
     let pageNumber = 10,
       limit = 0;
     await handleSetState({ isFetching: true });
