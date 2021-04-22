@@ -1,9 +1,11 @@
 module.exports = {
   future: {
-    // removeDeprecatedGapUtilities: true,
-    purgeLayersByDefault: false,
+    removeDeprecatedGapUtilities: true,
+    purgeLayersByDefault: true,
   },
   purge: [],
+  purge: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
+  whitelistPatterns: [/^fa-/],
   prefix: "",
   important: false,
   separator: ":",
