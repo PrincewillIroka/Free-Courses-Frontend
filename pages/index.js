@@ -147,11 +147,7 @@ function HomePage() {
 				</aside>
 				<main className="w-4/5 bg-spec flex-column h-screen overflow-hidden">
 					<SearchBar searchCourses={handleSearchRequest} />
-					<Controls
-						activeTab={state?.activeTab}
-						sortedBy={state?.sortedBy}
-						handleSorting={(sortedBy) => handleSorting(sortedBy)}
-					/>
+					<Controls activeTab={state?.activeTab} sortedBy={state?.sortedBy} handleSorting={handleSorting} />
 					{state.activeTab?.tag === 'all_courses' ? (
 						<Container
 							courses={state?.courses}
