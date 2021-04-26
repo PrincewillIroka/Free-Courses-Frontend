@@ -9,7 +9,6 @@ import Container from '../components/container';
 import MakeSuggestion from '../components/suggest-a-course';
 import Bookmarks from '../components/bookmarks';
 import { getCourses, searchCourses, getCoursesByCategory } from '../services/CourseService';
-import { combineData } from '../utils';
 
 const { publicRuntimeConfig } = getConfig();
 
@@ -39,11 +38,9 @@ function HomePage() {
 	const handleSetup = async () => {
 		let { pageNumber, limit } = state;
 
-		setState(
-			combineData(state, {
-				bookmarks: JSON.parse(localStorage?.getItem('bookmarks')) || [],
-			})
-		);
+		handleSetState({
+			bookmarks: JSON.parse(localStorage?.getItem('bookmarks')) || [],
+		});
 
 		await getCourses({ API_URL, pageNumber, limit })
 			.then((response) => {
@@ -51,16 +48,22 @@ function HomePage() {
 				if (response && response?.success) {
 					courses = response?.payload || [];
 				}
-				setState(
-					combineData(state, {
-						courses,
-						isFetching: false,
-					})
-				);
+				handleSetState({
+					courses,
+					isFetching: false,
+				});
 			})
 			.catch((error) => {
 				console.error(error);
 			});
+	};
+
+	const handleSetState = (params) => {
+		const obj = {};
+		for (const property in params) {
+			obj[property] = params[property];
+		}
+		setState({ ...state, ...obj });
 	};
 
 	const handleBookmark = (course) => {
@@ -79,14 +82,6 @@ function HomePage() {
 		});
 	};
 
-	const handleSetState = (params) => {
-		const obj = {};
-		for (const property in params) {
-			obj[property] = params[property];
-		}
-		setState({ ...state, ...obj });
-	};
-
 	const handleSearchRequest = async (value) => {
 		let { pageNumber, limit } = state;
 		handleSetState({ isFetching: true });
@@ -102,13 +97,19 @@ function HomePage() {
 	};
 
 	const changeCategory = async (categoryId) => {
-		let pageNumber = 10,
-			limit = 0;
+		let pageNumber = 0,
+			limit = 10;
 		await handleSetState({ isFetching: true });
 		await getCoursesByCategory({ API_URL, categoryId, pageNumber, limit })
 			.then((response) => {
-				const courses = response?.payload || [];
-				handleSetState({ isFetching: false, courses });
+        let courses = [];
+				if (response && response?.success) {
+					courses = response?.payload || [];
+				}
+				handleSetState({
+					courses,
+					isFetching: false,
+				});
 			})
 			.catch((error) => {
 				console.error(error);
@@ -118,7 +119,6 @@ function HomePage() {
 
 	const handleSorting = (sortedBy) => {
 		let { courses } = state;
-
 		courses = courses?.sort((a, b) => {
 			const aTitle = a.title.split(' ').join('');
 			const bTitle = b.title.split(' ').join('');
@@ -130,8 +130,7 @@ function HomePage() {
 			}
 			return value;
 		});
-
-		setState(combineData(state, { courses, sortedBy }));
+		handleSetState({ courses, sortedBy });
 	};
 
 	return (

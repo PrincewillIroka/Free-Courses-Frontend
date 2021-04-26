@@ -19,7 +19,7 @@ export default function LeftSidebar({ tabs, activeTab, setActiveTab }) {
           return (
             <div
               key={index}
-              className={`flex items-center py-2 px-4 mb-4 select-none ${
+              className={`flex items-center py-2 px-4 mb-4 select-none cursor-pointer ${
                 activeTab?.tag === tab.tag ? "active-tab" : "inactive-tab"
               }`}
               onClick={() => setActiveTab(tab)}
@@ -31,7 +31,7 @@ export default function LeftSidebar({ tabs, activeTab, setActiveTab }) {
               ) : tab.tag === "suggest_course" ? (
                 <HandOkayIcon color="#cf1717" className="mr-4" />
               ) : null}
-              <span className="font-medium cursor-default capitalize">
+              <span className="font-medium cursor-default capitalize cursor-pointer">
                 {tab.title}
               </span>
             </div>
