@@ -27,6 +27,7 @@ function HomePage() {
 		courses: [],
 		pageNumber: 0,
 		limit: 10,
+		sortedBy: 'ascending',
 	});
 
 	const API_URL = publicRuntimeConfig.API_URL;
@@ -58,7 +59,7 @@ function HomePage() {
 				);
 			})
 			.catch((error) => {
-				console.log(error);
+				console.error(error);
 			});
 	};
 
@@ -115,6 +116,24 @@ function HomePage() {
 			});
 	};
 
+	const handleSorting = (sortedBy) => {
+		let { courses } = state;
+
+		courses = courses?.sort((a, b) => {
+			const aTitle = a.title.split(' ').join('');
+			const bTitle = b.title.split(' ').join('');
+			let value;
+			if (sortedBy === 'ascending') {
+				value = aTitle > bTitle ? 1 : -1;
+			} else if (sortedBy === 'descending') {
+				value = bTitle > aTitle ? 1 : -1;
+			}
+			return value;
+		});
+
+		setState(combineData(state, { courses, sortedBy }));
+	};
+
 	return (
 		<div>
 			<Layout />
@@ -128,7 +147,11 @@ function HomePage() {
 				</aside>
 				<main className="w-4/5 bg-spec flex-column h-screen overflow-hidden">
 					<SearchBar searchCourses={handleSearchRequest} />
-					<Controls activeTab={state?.activeTab} />
+					<Controls
+						activeTab={state?.activeTab}
+						sortedBy={state?.sortedBy}
+						handleSorting={(sortedBy) => handleSorting(sortedBy)}
+					/>
 					{state.activeTab?.tag === 'all_courses' ? (
 						<Container
 							courses={state?.courses}
