@@ -6,3 +6,7 @@ A Next.js(React) app that helps users to browse the latest free online courses f
 - Users can browse/search for online courses.
 - Users can bookmark courses.
 - Users can request for a course to be added to the platform.
+
+## Screenshots
+
+![App Screenshot](https://i.imgur.com/g5qSS3P.png)
