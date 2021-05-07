@@ -4,7 +4,7 @@ import DescendingSortIcon from 'mdi-react/SortAlphabeticalDescendingIcon';
 
 export default function Controls({ activeTab, sortedBy, handleSorting }) {
 	return (
-		<section className="pl-6 pr-8 mb-8 flex items-center justify-between bg-gray-300 h-8">
+		<section className="px-8 mb-8 flex items-center justify-between bg-gray-300 h-8">
 			<div className="font-bold">
 				<span>Courses</span>
 				<span className="mx-2">/</span>

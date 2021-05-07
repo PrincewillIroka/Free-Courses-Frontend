@@ -3,7 +3,7 @@ import CardsHeartIcon from 'mdi-react/CardsHeartIcon';
 import HeartOutlineIcon from 'mdi-react/HeartOutlineIcon';
 import shortid from 'shortid';
 
-function Container({ courses, isFetching, handleBookmark }) {
+function Container({ courses, isFetching, handleBookmark, handleScrollToBottom }) {
 	const [state, setState] = useState({
 		dummyStars: new Array(5).fill(),
 		bookmarks: [],
@@ -36,8 +36,15 @@ function Container({ courses, isFetching, handleBookmark }) {
 		window.open(link, '_newtab');
 	};
 
+	const handleScroll = (e) => {
+		const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
+		if (bottom) {
+			handleScrollToBottom();
+		}
+	};
+
 	return (
-		<section className="px-6 h-container sleek-scrollbar">
+		<section className="px-6 h-container sleek-scrollbar" onScroll={(e) => handleScroll(e)}>
 			{isFetching ? (
 				<div className="flex h-full items-center justify-center">
 					<span>Loading...</span>

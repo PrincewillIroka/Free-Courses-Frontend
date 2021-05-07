@@ -87,8 +87,14 @@ function HomePage() {
 		handleSetState({ isFetching: true });
 		await searchCourses({ API_URL, title: value, pageNumber, limit })
 			.then((response) => {
-				const courses = response?.payload || [];
-				handleSetState({ isFetching: false, courses });
+				let courses = [];
+				if (response && response?.success) {
+					courses = response?.payload || [];
+				}
+				handleSetState({
+					courses,
+					isFetching: false,
+				});
 			})
 			.catch((error) => {
 				console.error(error);
@@ -102,7 +108,7 @@ function HomePage() {
 		await handleSetState({ isFetching: true });
 		await getCoursesByCategory({ API_URL, categoryId, pageNumber, limit })
 			.then((response) => {
-        let courses = [];
+				let courses = [];
 				if (response && response?.success) {
 					courses = response?.payload || [];
 				}
@@ -133,6 +139,8 @@ function HomePage() {
 		handleSetState({ courses, sortedBy });
 	};
 
+	const handleScrollToBottom = () => {};
+
 	return (
 		<div>
 			<Layout />
@@ -152,6 +160,7 @@ function HomePage() {
 							courses={state?.courses}
 							isFetching={state?.isFetching}
 							handleBookmark={handleBookmark}
+							handleScrollToBottom={handleScrollToBottom}
 						/>
 					) : state.activeTab?.tag === 'bookmarks' ? (
 						<Bookmarks
