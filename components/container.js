@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import CardsHeartIcon from 'mdi-react/CardsHeartIcon';
 import HeartOutlineIcon from 'mdi-react/HeartOutlineIcon';
 import shortid from 'shortid';
+import Loader from 'react-loader-spinner';
 
 function Container({ courses, isFetching, handleBookmark, handleScrollToBottom }) {
 	const [state, setState] = useState({
@@ -47,7 +48,7 @@ function Container({ courses, isFetching, handleBookmark, handleScrollToBottom }
 		<section className="px-6 h-container sleek-scrollbar" onScroll={(e) => handleScroll(e)}>
 			{isFetching ? (
 				<div className="flex h-full items-center justify-center">
-					<span>Loading...</span>
+					<Loader type="Audio" color="#00BFFF" height={70} width={100} />
 				</div>
 			) : courses?.length ? (
 				<div className="grid gap-8 row-gap-10 grid-cols-3">
